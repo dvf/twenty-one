@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load shared_elements %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap-datepicker/bootstrap-datepicker3.standalone.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% section_heading 'New Habit' 'Create' %}
+
+    <form action="{% url 'habit:create' %}" method="post">
+        {% csrf_token %}
+
+        <!-- habit -->
+        <div class="form-group">
+            <label for="{{ form.name.id_for_label }}">Name of Habit</label>
+            {{ form.name }}
+            <small class="form-text text-muted"><i class="fa fa-exclamation-circle"></i> This will be the name that your friends will see if you share it.</small>
+        </div>
+
+        <!-- Date -->
+        <div class="form-group">
+            <label for="{{ form.start_date.id_for_label }}">When do you want to begin?</label>
+            {{ form.start_date }}
+            <small class="form-text text-muted">There's no day like today.</small>
+        </div>
+
+        <div class="form-group row submission">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-info">Begin</button>
+                <a href="/" class="btn btn-secondary">Chicken Out</a>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'vendor/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+    <script>
+        $('#id_start_date').datepicker({
+            startDate: "today",
+            todayHighlight: true
+        });
+    </script>
+{% endblock %}

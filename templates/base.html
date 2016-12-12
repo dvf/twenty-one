@@ -1,0 +1,109 @@
+{% load staticfiles %}
+{% load shared_elements %}
+{% load socialaccount %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-Compatible" content="IE=edge">
+
+    <title>21</title>
+
+
+    <!-- dependencies -->
+    <link href="{% static 'vendor/fontawesome/css/font-awesome.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/base.css' %}" rel="stylesheet"/>
+
+
+    <!-- icon-logo -->
+    <link rel="icon" type="image/png" href="{% static 'branding/icon.png' %}">
+
+
+    <!-- additional-loads -->
+    <link rel="stylesheet" href="{% static 'vendor/toastr/toastr.min.css' %}">
+
+
+    <!-- additional-headers -->
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <!-- container -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-3 sidebar">
+
+                <!-- navbar -->
+                <nav class="navbar navbar-light navbar-static-top">
+                    <div class="sidebar-container">
+                        <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"></button>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a href="/" class="navbar-brand navbar-brand-logo">
+                                    <img src="{% static 'branding/logo.png' %}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="collapse navbar-toggleable-md" id="navbarResponsive">
+
+                            <ul class="nav nav-stacked">
+                                {% nav_link 'New Habit' 'habit:create' 'outline' %}
+                            </ul>
+                            <ul class="nav nav-stacked">
+                                <li class="navbar-subheader">More</li>
+                                {% nav_link 'New Habit' 'habit:create' 'outline' %}
+                                {% nav_link 'More' '' 'outline' %}
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- /navbar -->
+
+            </div>
+
+
+            <div class="col-md-9">
+                {% providers_media_js %}
+                <a href="{% provider_login_url "facebook" method="js_sdk" %}">Facebook Connect</a>
+
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+    <!-- /container -->
+
+
+    <!-- scripts -->
+    <script src="{% static 'js/jquery-3.1.0.min.js' %}"></script>
+    <script src="{% static 'js/tether.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    {% block scripts %}
+        <!-- no extra scripts were loaded -->
+    {% endblock %}
+    <!-- /scripts -->
+
+
+    <!-- toastr-notifications -->
+    {% if messages %}
+        <script src="{% static 'vendor/toastr/toastr.min.js' %}"></script>
+        <script>toastr.options.positionClass = "toast-bottom-right";</script>
+        <script>
+            {% for message in messages %}
+                toastr.{{ message.tags }}('{{ message|safe }}');
+            {% endfor %}
+        </script>
+    {% endif %}
+    <!-- /toastr-notifications -->
+
+
+    <footer>
+        This is the Footer
+    </footer>
+</body>
+</html>

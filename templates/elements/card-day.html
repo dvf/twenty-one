@@ -1,0 +1,8 @@
+{% load roman %}
+{% load weekday %}
+
+
+<div class="day-card day-card-{{ context }} {% if clickable %}day-clickable{% endif %}" {% if log_id %}data-toggle="modal" data-target="#complete-day" data-log-id="{{ log_id }}"{% endif %}>
+    <div class="weekday">{{ day|weekday }}</div>
+    <div class="day">{{ day|write_roman }}</div>
+</div>

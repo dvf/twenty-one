@@ -1,0 +1,42 @@
+{% extends "_shared/base.html" %}
+{% load staticfiles %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'resources/vendor/fontawesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'resources/css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="card card-container">
+            <img id="profile-img" class="profile-img-card" src="{% static 'resources/images/app-icon.png' %}"/>
+            <p id="profile-name" class="profile-name-card">Newman</p>
+            {% if form.errors %}
+                <p class="text-danger text-center">Incorrect username or password.</p>
+            {% endif %}
+
+            {% if next %}
+                {% if user.is_authenticated %}
+                    <p class="text-danger text-center">Your account doesn't have access to this page. To proceed,
+                        please login with an account that has access.</p>
+                {% else %}
+                    <p>Please login to see this page.</p>
+                {% endif %}
+            {% endif %}
+
+            <form method="post" action="{% url 'auth:login' %}">
+                {% csrf_token %}
+                <input type="text" id="id_username" class="form-control" placeholder="Username" name="username" required autofocus>
+                <input type="password" id="id_password" class="form-control" placeholder="Password" name="password" required>
+                <br>
+                <button class="btn btn-default btn-block" type="submit">Sign in</button>
+                <hr>
+                <input type="hidden" name="next" value="">
+            </form><!-- /form -->
+                <a href="{% url 'social:begin' 'google-oauth2' %}?next=/" class="btn btn-primary btn-block"><i class="fa fa-google" aria-hidden="true"></i> Sign in with Google</a>
+
+                <!-- Next -->
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+
+{% endblock %}

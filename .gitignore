@@ -93,3 +93,6 @@ ENV/
 
 # Any sqlite Databases
 db.*
+
+# Weird Mac Stuff
+.DS_Store

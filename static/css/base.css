@@ -1,0 +1,188 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+hr {
+}
+
+.heading-muted {
+    color: #b4bcc3;
+}
+
+.navbar-brand-logo img {
+    width: 75%;
+}
+
+.navbar-brand {
+    padding-bottom: 2rem;
+}
+
+.section-heading {
+    font-weight: 300;
+    margin-top: 5rem;
+}
+
+.sidebar-container {
+    margin-right: 40px;
+}
+
+.sidebar-container .btn-outline-info {
+    border-color: transparent;
+}
+
+.sidebar-container ul {
+    margin-bottom: 40px;
+}
+
+.navbar-subheader {
+    text-transform: uppercase;
+    font-size: 75%;
+    padding: 7px 15px 7px 17px;
+    color: rgba(0,0,0,0.6);
+}
+.nav li {
+    margin-bottom: 5px;
+}
+
+.nav li a {
+    padding: 7px 15px 7px 15px;
+}
+
+
+.day-card {
+    border: 1px solid #b4bcc3;
+    border-radius: 2px;
+    padding: 5px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.day-clickable {
+    cursor: pointer;
+    cursor: hand;
+}
+
+.day-card-win          { border: 1px solid #22d9b1; background-color: #e8fbf7; }
+.day-card-win .weekday { color: #64e4c8; }
+.day-card-win .day     { color: #22d9b1; }
+
+.day-card-fail          { border: 1px solid #d85057; background-color: #fbedee; }
+.day-card-fail .weekday { color: #e48489; }
+.day-card-fail .day     { color: #d85057; }
+
+.day-card-warning          { border: 1px solid #d9864d; background-color: #fbf3ed; }
+.day-card-warning .weekday { color: #e4aa82; }
+.day-card-warning .day     { color: #d9864d; }
+
+.weekday {
+    text-transform: uppercase;
+    color: #b4bcc3;
+    font-size: 80%;
+    font-weight: 100;
+    letter-spacing: 0.1rem;
+}
+.day {
+    font-size: 200%;
+    font-weight: 100;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+}
+
+.submission {
+    margin-top: 3rem;
+}
+
+.jumbotron {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  margin-bottom: 0;
+}
+
+.jumbotron p:last-child {
+  margin-bottom: 0;
+}
+
+.jumbotron-heading {
+  font-weight: 100;
+}
+
+.jumbotron .container {
+  max-width: 40rem;
+}
+
+
+.modal-title {
+    font-weight: 100;
+}
+
+#toast-container > .toast {
+    background-image: none !important;
+}
+
+#toast-container > .toast:before {
+    position: fixed;
+    font-family: FontAwesome;
+    font-size: 24px;
+    line-height: 18px;
+    float: left;
+    color: #FFF;
+    padding-right: 0.5em;
+    margin: auto 0.5em auto -1.5em;
+}
+#toast-container > .toast-warning:before {
+    content: "\f003";
+}
+#toast-container > .toast-error:before {
+    content: "\f001";
+}
+#toast-container > .toast-info:before {
+    content: "\f005";
+}
+#toast-container > .toast-success:before {
+    content: "\f002";
+}
+
+
+
+/* 7 Columns Hack */
+@media (min-width: 768px){
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1  {
+    width: 100%;
+    *width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+    *width: 14.285714285714285714285714285714%;
+  }
+}
+
+/**
+ *  The following is not really needed in this case
+ *  Only to demonstrate the usage of @media for large screens
+ */
+@media (min-width: 1200px) {
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+    *width: 14.285714285714285714285714285714%;
+  }
+}

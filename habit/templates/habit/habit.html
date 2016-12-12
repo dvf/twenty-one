@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load shared_elements %}
+
+
+{% block content %}
+    {% if no_habits %}
+        {% section_heading 'Your Habits' %}
+        <section class="jumbotron text-xs-center">
+            <div class="container">
+                <div class="display-4 jumbotron-heading">Start Somewhere.</div>
+                <p class="lead text-muted">It all starts with recognising that something must change.</p>
+                <br>
+                <p>
+                    <a href="{% url 'habit:create' %}" class="btn btn-info">Create your First Habit</a>
+                    <a href="#" class="btn btn-secondary">See your Friends' Habits</a>
+                </p>
+            </div>
+        </section>
+    {% endif %}
+
+    {% for habit in habits %}
+        {% if not habit.is_over %}
+
+            {% section_heading habit.name 'Current' %}
+            <div class="row seven-cols">
+                {% for log in habit.dailylog_set.all %}
+                    <div class="col-md-1 col-sm-3">
+                        {% if not log.is_over and log.can_complete %}
+                            {% card_day forloop.counter0 log.get_context log.id log.can_complete %}
+                        {% else %}
+                            {% card_day forloop.counter0 log.get_context %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+
+        {% else %}
+
+            {% section_heading habit.name 'Past' %}
+            <div class="row seven-cols">
+                {% for log in habit.dailylog_set.all %}
+                    <div class="col-md-1 col-sm-3">
+                        {% card_day forloop.counter log.get_context %}
+                    </div>
+                {% endfor %}
+            </div>
+
+        {% endif %}
+    {% endfor %}
+
+
+
+    <div class="modal fade" id="complete-day" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content text-lg-center">
+
+                <div class="modal-body">
+                    <form action="{% url 'habit:log-complete' %}" method="post">
+                        {% csrf_token %}
+                        <input id="logId" type="hidden" name="log">
+                        <section class="jumbotron text-xs-center">
+                            <div class="display-4 jumbotron-heading">Oh yeah...</div>
+                            <p class="lead text-muted">It's awesome finishing what you start!</p>
+                            <br>
+                            <p>
+                                <button type="submit" class="btn btn-info">Mark Day as Complete</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            </p>
+                        </section>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        $('#complete-day').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var logId = button.data('logId');
+            var modal = $(this);
+            modal.find('#logId').val(logId);
+        });
+    </script>
+{% endblock %}
