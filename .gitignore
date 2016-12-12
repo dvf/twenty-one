@@ -96,3 +96,5 @@ db.*
 
 # Weird Mac Stuff
 .DS_Store
+
+staticfiles/
