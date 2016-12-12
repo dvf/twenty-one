@@ -94,11 +94,9 @@ INSTALLED_APPS += [
 # ------------------------------------------------------------------------
 #
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
+    'default': env.db()
 }
+CONN_MAX_AGE = 500
 
 
 # Password validation
@@ -125,10 +123,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # ------------------------------------------------------------------------
 #
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 
 # User Model Stuff
