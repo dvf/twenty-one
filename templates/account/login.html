@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load shared_elements %}
+
+
+{% block content %}
+
+    {% section_heading 'Required' 'Sign In' %}
+
+    <section class="jumbotron text-xs-center">
+        <div class="container">
+            <div class="display-4 jumbotron-heading">Start Somewhere.</div>
+            <p class="lead">It all starts with recognising that something must change.</p>
+            <p class="text-muted">Twenty One is an opportunity to change yourself in 21 days.<br>With the encouragement of your friends, doing something daily,<br>for 21 days will force you to change your habits.</p>
+            <br>
+            <p>
+                <a href="{% provider_login_url "facebook" method="js_sdk" %}" class="btn btn-info">
+                <i class="fa fa-facebook-official"></i> Sign in with Facebook</a>
+            </p>
+        </div>
+    </section>
+
+{% endblock %}

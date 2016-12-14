@@ -50,9 +50,10 @@ hr {
     margin-bottom: 5px;
 }
 
-.nav li a {
+.nav li a, .nav li button {
     padding: 7px 15px 7px 15px;
 }
+
 
 
 .day-card {
@@ -83,7 +84,7 @@ hr {
 .weekday {
     text-transform: uppercase;
     color: #b4bcc3;
-    font-size: 80%;
+    font-size: 65%;
     font-weight: 100;
     letter-spacing: 0.1rem;
 }

@@ -1,6 +1,7 @@
 {% load staticfiles %}
 {% load shared_elements %}
 {% load socialaccount %}
+{% providers_media_js %}
 
 
 <!DOCTYPE html>
@@ -37,44 +38,51 @@
         <div class="row">
             <div class="col-md-3 sidebar">
 
-                <!-- navbar -->
-                <nav class="navbar navbar-light navbar-static-top">
-                    <div class="sidebar-container">
-                        <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"></button>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <a href="/" class="navbar-brand navbar-brand-logo">
-                                    <img src="{% static 'branding/logo.png' %}" alt="">
-                                </a>
+                    <!-- navbar -->
+                    <nav class="navbar navbar-light navbar-static-top">
+                        <div class="sidebar-container">
+                            <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"></button>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a href="/" class="navbar-brand navbar-brand-logo">
+                                        <img src="{% static 'branding/logo.png' %}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="collapse navbar-toggleable-md" id="navbarResponsive">
+                                {% if request.user.is_authenticated %}
+                                    <ul class="nav nav-stacked">
+                                        {% nav_link 'New Habit' 'habit:create' 'outline' %}
+                                    </ul>
+                                    <ul class="nav nav-stacked">
+                                        <li class="navbar-subheader">More</li>
+                                        {% nav_link 'Settings' '' 'outline' %}
+                                        {% nav_link 'Integrations' '' 'outline' %}
+                                        {% nav_link 'Encouragements' '' 'outline' %}
+                                    </ul>
+                                    <ul class="nav nav-stacked">
+                                        <form method="post" action="{% url 'account_logout' %}">
+                                            {% csrf_token %}
+                                            {% if redirect_field_value %}
+                                                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                                            {% endif %}
+                                            <li class="nav-item"><button class="btn btn-sm btn-block text-sm-left btn-outline-info" type="submit">Sign Out</button></li>
+                                        </form>
+                                    </ul>
+                                {% endif %}
                             </div>
                         </div>
-                        <div class="collapse navbar-toggleable-md" id="navbarResponsive">
-
-                            <ul class="nav nav-stacked">
-                                {% nav_link 'New Habit' 'habit:create' 'outline' %}
-                            </ul>
-                            <ul class="nav nav-stacked">
-                                <li class="navbar-subheader">More</li>
-                                {% nav_link 'New Habit' 'habit:create' 'outline' %}
-                                {% nav_link 'More' '' 'outline' %}
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-                <!-- /navbar -->
+                    </nav>
+                    <!-- /navbar -->
 
             </div>
-
-
+            <!-- content -->
             <div class="col-md-9">
-                {% providers_media_js %}
-                <a href="{% provider_login_url "facebook" method="js_sdk" %}">Facebook Connect</a>
-
                 {% block content %}
                 {% endblock %}
             </div>
+            <!-- /content -->
         </div>
-
     </div>
     <!-- /container -->
 
@@ -102,8 +110,10 @@
     <!-- /toastr-notifications -->
 
 
-    <footer>
-        This is the Footer
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted"><small>&copy; 2016 Daniel van Flymen | <a href="#">Made in a YouTube Video</a></small></p>
+        </div>
     </footer>
 </body>
 </html>
