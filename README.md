@@ -5,7 +5,7 @@ It all starts with the recognition that something must change. Apparently a huma
 
 
 ## Vlogging and Current State
-This was made by me for my YouTube Vlog: https://www.youtube.com/vanflymen
+This was made by me for my YouTube Vlog: https://www.youtube.com/watch?v=GTjjVu3hf3E&t=16s
 
 ## Hosting
 Currently hosted on Heroku: 
